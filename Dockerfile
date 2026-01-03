@@ -9,7 +9,14 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    supervisor
+    supervisor \
+    nginx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installer Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 # Installer les extensions PHP nécessaires
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
@@ -17,34 +24,35 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Créer un utilisateur non root
-RUN useradd -ms /bin/bash -u 1337 app
-
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
 # Copier les fichiers de l'application
-COPY . .
-
-# Changer le propriétaire des fichiers
-RUN chown -R app:app /var/www/html
-RUN chmod -R 755 /var/www/html/storage
+COPY --chown=www-data:www-data . .
 
 # Installer les dépendances PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Installer les dépendances frontend
-RUN npm install
-RUN npm run build
+# Installer les dépendances frontend et build
+RUN npm ci && npm run build
 
-# Changer de propriétaire après l'installation des dépendances
-RUN chown -R app:app /var/www/html
+# Créer les dossiers nécessaires et définir les permissions
+RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
-# Passer à l'utilisateur non root
-USER app
+# Copier la configuration nginx
+COPY docker/nginx/conf.d/default.conf /etc/nginx/sites-available/default
 
-# Exposer le port
-EXPOSE 9000
+# Copier la configuration supervisor
+COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Démarrer PHP-FPM
-CMD ["php-fpm"]
+# Copier et préparer l'entrypoint
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Exposer le port HTTP
+EXPOSE 80
+
+# Utiliser l'entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

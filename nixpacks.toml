@@ -1,0 +1,18 @@
+[phases.setup]
+nixPkgs = ["php83", "php83Extensions.pdo_mysql", "php83Extensions.mbstring", "php83Extensions.exif", "php83Extensions.pcntl", "php83Extensions.bcmath", "php83Extensions.gd", "php83Extensions.redis", "nodejs_20", "npm"]
+
+[phases.install]
+cmds = [
+    "composer install --no-dev --optimize-autoloader",
+    "npm ci"
+]
+
+[phases.build]
+cmds = [
+    "npm run build",
+    "mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache",
+    "chmod -R 777 storage bootstrap/cache"
+]
+
+[start]
+cmd = "chmod -R 777 storage bootstrap/cache && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-80}"
