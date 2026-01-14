@@ -7,7 +7,7 @@ chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Attendre que la base de données soit prête
 echo "Waiting for database..."
-while ! php artisan db:monitor --databases=mysql 2>/dev/null; do
+while ! php artisan db:monitor --databases=pgsql 2>/dev/null; do
     sleep 2
 done
 echo "Database is ready!"
@@ -20,5 +20,5 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Démarrer PHP-FPM
-exec php-fpm
+# Démarrer supervisor (nginx + php-fpm)
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

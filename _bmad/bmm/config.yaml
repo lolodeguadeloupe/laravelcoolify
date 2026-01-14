@@ -1,0 +1,22 @@
+# BMad Method Module Configuration
+# Laravel Coolify Project
+
+module:
+  id: bmm
+  name: "BMad Method"
+  version: "6.0.0-alpha"
+  description: "Software Development Methodology"
+
+settings:
+  output_folder: "../../_bmad-output"
+  planning_artifacts_folder: "../../_bmad-output/planning-artifacts"
+
+  # Project-specific settings
+  project_type: "web-application"
+  framework: "Laravel + React + Inertia.js"
+
+  # Communication
+  communication_language: "french"
+
+  # Workflow settings
+  default_track: "bmad-method"  # Options: quick-flow, bmad-method, enterprise

@@ -1,0 +1,13 @@
+# BMad Core Configuration
+# Generated for Laravel Coolify Project
+
+project_name: "Laravel Coolify"
+output_folder: "./_bmad-output"
+user_name: "Laurent"
+communication_language: "french"
+
+# Module settings
+modules:
+  bmm:
+    enabled: true
+    description: "BMad Method - Software Development Methodology"
