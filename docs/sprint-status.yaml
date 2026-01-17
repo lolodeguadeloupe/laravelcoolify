@@ -1,0 +1,257 @@
+# Sprint Status - Event Cool
+# Mis à jour automatiquement par le workflow BMAD
+
+project: Event Cool
+current_epic: E3
+sprint_goal: "Implémenter l'achat de billets"
+
+# État des Epics
+epics:
+  E0:
+    name: "Page d'Accueil"
+    status: complete
+    completed_at: "2026-01-16"
+    stories:
+      S0.1:
+        name: "Section Hero"
+        status: complete
+        priority: P0
+        notes: "HeroSection component, CTA vers catalogue"
+      S0.2:
+        name: "Événements à la une"
+        status: complete
+        priority: P0
+        notes: "FeaturedEventsSection, is_featured=true, limit 6"
+      S0.3:
+        name: "Événements à venir"
+        status: complete
+        priority: P0
+        notes: "UpcomingEventsSection, is_featured=false, limit 6"
+
+  E1:
+    name: "Auth & Comptes"
+    status: complete
+    notes: "Fortify + pages Inertia déjà en place, is_organizer ajouté"
+
+  E2:
+    name: "Catalogue Événements"
+    status: complete
+    completed_at: "2026-01-15"
+    stories:
+      S2.1:
+        name: "Liste des événements"
+        status: complete
+        notes: "EventController@index, events/index.tsx, pagination, cache Redis 5min"
+      S2.2:
+        name: "Détail d'un événement"
+        status: complete
+        notes: "EventController@show, events/show.tsx, Schema.org SEO"
+      S2.3:
+        name: "Recherche d'événements"
+        status: complete
+        notes: "Recherche ILIKE sur titre, description, lieu, ville avec debounce 300ms"
+      S2.4:
+        name: "Affichage catégories de billets"
+        status: complete
+        notes: "TicketCategoryCard sur page show avec stock et disponibilité"
+
+  E3:
+    name: "Achat de Billets"
+    status: complete
+    completed_at: "2026-01-15"
+    stories:
+      S3.1:
+        name: "Sélection catégorie de billet"
+        status: complete
+        notes: "CartContext, bouton Ajouter au panier, feedback visuel"
+      S3.2:
+        name: "Choix quantité"
+        status: complete
+        notes: "Sélecteur quantité +/-, respect max_per_order"
+      S3.3:
+        name: "Récapitulatif commande"
+        status: complete
+        notes: "checkout/index.tsx, validation serveur, calcul frais"
+      S3.4:
+        name: "Paiement Stripe"
+        status: complete
+        notes: "PaymentService, Stripe Checkout, webhook, tests (18 tests CheckoutController + 5 PaymentService)"
+      S3.5:
+        name: "Confirmation commande"
+        status: complete
+        notes: "checkout/success.tsx avec polling, affiche détails commande et billets"
+      S3.6:
+        name: "Envoi billets par email"
+        status: complete
+        notes: "SendTicketEmail Job, TicketPurchased Mailable, vue email blade"
+
+  E4:
+    name: "Gestion des Billets"
+    status: complete
+    completed_at: "2026-01-15"
+    stories:
+      S4.1:
+        name: "Liste Mes billets"
+        status: complete
+        notes: "TicketController@index, tickets/index.tsx, groupé par événement"
+      S4.2:
+        name: "Affichage QR code"
+        status: complete
+        notes: "TicketController@show, tickets/show.tsx avec QR code"
+      S4.3:
+        name: "Téléchargement PDF"
+        status: complete
+        notes: "TicketController@downloadPdf, barryvdh/laravel-dompdf"
+      S4.4:
+        name: "Renvoi email"
+        status: complete
+        notes: "TicketController@resend, rate limiting 3/heure"
+      S4.5:
+        name: "Récupération billet guest"
+        status: complete
+        notes: "TicketController@recover+findTicket, tickets/recover.tsx"
+
+  E5:
+    name: "Gestion des Événements"
+    status: complete
+    completed_at: "2026-01-15"
+    stories:
+      S5.1:
+        name: "Création événement"
+        status: complete
+        notes: "Organizer/EventController@store, StoreEventRequest"
+      S5.2:
+        name: "Informations événement"
+        status: complete
+        notes: "create.tsx + edit.tsx, upload image"
+      S5.3:
+        name: "Création catégories billets"
+        status: complete
+        notes: "Organizer/TicketCategoryController, CRUD complet"
+      S5.4:
+        name: "Prix et jauge par catégorie"
+        status: complete
+        notes: "Prix en centimes, quantité, max_per_order, dates vente"
+      S5.5:
+        name: "Publication événement"
+        status: complete
+        notes: "Organizer/EventController@publish"
+      S5.6:
+        name: "Dépublication événement"
+        status: complete
+        notes: "cancel() utilisé pour MVP, status -> cancelled"
+      S5.7:
+        name: "Modification événement"
+        status: complete
+        notes: "Organizer/EventController@update, UpdateEventRequest"
+      S5.8:
+        name: "Suppression événement"
+        status: complete
+        notes: "Organizer/EventController@destroy avec autorisation"
+
+  E6:
+    name: "Dashboard Organisateur"
+    status: complete
+    completed_at: "2026-01-15"
+    stories:
+      S6.1:
+        name: "Liste mes événements"
+        status: complete
+        notes: "organizer/events/index.tsx, statut, billets vendus"
+      S6.2:
+        name: "Statistiques de vente"
+        status: complete
+        notes: "organizer/events/show.tsx avec tickets_count, orders_count"
+      S6.3:
+        name: "Liste billets vendus"
+        status: complete
+        notes: "Dans show.tsx avec dernières commandes"
+      S6.4:
+        name: "Montant total des ventes"
+        status: complete
+        notes: "Affiché dans show.tsx"
+
+  E7:
+    name: "Scan & Contrôle"
+    status: complete
+    completed_at: "2026-01-17"
+    stories:
+      S7.1:
+        name: "Accès mode scan"
+        status: complete
+        priority: P0
+        story_file: "_bmad-output/implementation-artifacts/stories/S7.1-acces-mode-scan.md"
+        completed_at: "2026-01-15"
+        notes: "Page scan/index.tsx, EventSelector, CameraPermission, bouton Scanner dashboard, 5 tests"
+      S7.2:
+        name: "Scan QR code"
+        status: complete
+        priority: P0
+        completed_at: "2026-01-17"
+        notes: "QRScanner intégré avec html5-qrcode, vibration, debounce 3s, appel API /scan/validate, ScanResult avec auto-dismiss 3s"
+      S7.3:
+        name: "Résultat du scan"
+        status: complete
+        priority: P0
+        completed_at: "2026-01-17"
+        notes: "3 états implémentés (valid=vert, already_used=orange, invalid=rouge), auto-dismiss 3s, 11 tests passent"
+      S7.4:
+        name: "Mode offline"
+        status: complete
+        priority: P1
+        completed_at: "2026-01-17"
+        notes: "IndexedDB avec idb, hook useOfflineScan, téléchargement auto billets, validation locale, sync auto, OfflineIndicator, 4 tests ajoutés"
+      S7.5:
+        name: "Liste des scans"
+        status: complete
+        priority: P1
+        completed_at: "2026-01-17"
+        notes: "ScanHistory.tsx avec stats, filtres, tri, rafraîchissement auto 30s, bouton actualiser, 5 tests ajoutés"
+
+# Story actuelle
+current_story: null
+next_story: null
+
+# Dernier Epic complété
+current_epic: null
+last_completed_epic: E7
+
+# Notes d'implémentation
+implementation_notes: |
+  Iteration 1 (2026-01-15):
+  - E2 Catalogue complet: EventController, pages index/show, recherche, pagination
+  - Tests: 13 tests passent (EventControllerTest)
+  - Frontend: shadcn/ui, Wayfinder pour routes typées
+
+  Iteration 2 (2026-01-15):
+  - S3.1-S3.3 complètes: CartContext, panier, checkout page
+  - Tests: 23 tests passent (Event + Checkout)
+  - Validation stock côté serveur, calcul frais de service
+
+  Iteration 3 (2026-01-15):
+  - E3 Achat de Billets COMPLET
+  - S3.4 Paiement Stripe: PaymentService, Stripe Checkout session, webhook
+  - S3.5 Confirmation: checkout/success.tsx avec polling status
+  - S3.6 Envoi billets: SendTicketEmail Job, TicketPurchased Mailable
+  - Tests: 36 tests passent (13 Event + 18 Checkout + 5 PaymentService)
+
+  Iteration 4 (2026-01-15):
+  - E1-E6 COMPLETS! Vérification de l'état complet du codebase
+  - E4 Gestion Billets: TicketController avec index/show/pdf/resend/recover
+  - E5 Gestion Événements: Organizer/EventController complet + TicketCategoryController
+  - E6 Dashboard: organizer/events/index+show avec stats
+  - Tests: 146 tests passent
+  - Prochaine étape: E7 Scan & Contrôle d'Accès
+
+  Iteration 5 (2026-01-17):
+  - S7.1 Accès mode scan COMPLET: EventSelector, CameraPermission, page scan/index.tsx
+  - S7.2 Scan QR code COMPLET: QRScanner avec html5-qrcode, vibration, debounce 3s
+  - S7.3 Résultat du scan COMPLET: 3 états (valid/already_used/invalid), auto-dismiss 3s
+  - S7.4 Mode offline COMPLET: IndexedDB (idb), hook useOfflineScan, OfflineIndicator
+  - S7.5 Liste des scans COMPLET: ScanHistory avec stats, filtres, tri, rafraîchissement auto 30s
+  - 🎉 E7 SCAN & CONTRÔLE COMPLET ! Toutes les stories implémentées
+  - Backend: ScanController avec validate(), history(), offlineData(), syncOfflineScans()
+  - Correction TicketFactory: génération HMAC correcte pour qr_code, méthodes cancelled()/refunded()
+  - Package npm: idb ajouté pour IndexedDB
+  - Tests: 20 tests passent pour ScanController (6 accès + 5 validation + 4 offline + 5 history)
+  - E7 complète : 5/5 stories (100%)

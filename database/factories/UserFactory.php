@@ -56,4 +56,14 @@ class UserFactory extends Factory
             'two_factor_confirmed_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the user is an organizer.
+     */
+    public function organizer(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_organizer' => true,
+        ]);
+    }
 }

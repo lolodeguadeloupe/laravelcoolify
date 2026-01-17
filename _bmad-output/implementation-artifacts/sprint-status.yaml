@@ -1,0 +1,124 @@
+# generated: 2026-01-17
+# project: Event Cool
+# project_key: event-cool
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts/stories
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Mark epic as 'in-progress' when starting work on its first story
+# - SM typically creates next story ONLY after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then Dev runs code-review (fresh context, ideally different LLM)
+
+generated: 2026-01-17
+project: Event Cool
+project_key: event-cool
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts/stories
+
+development_status:
+  # ============================================
+  # E0: Page d'Accueil (3 stories) - P0/Low
+  # ============================================
+  epic-0: in-progress
+  0-1-section-hero: done
+  0-2-evenements-a-la-une: done
+  0-3-evenements-a-venir: backlog
+  epic-0-retrospective: optional
+
+  # ============================================
+  # E1: Auth & Comptes (5 stories) - P0/Low
+  # ============================================
+  epic-1: in-progress
+  1-1-inscription-utilisateur: ready-for-dev
+  1-2-connexion-utilisateur: backlog
+  1-3-reinitialisation-mot-de-passe: backlog
+  1-4-deconnexion: backlog
+  1-5-choix-du-role-utilisateur: backlog
+  epic-1-retrospective: optional
+
+  # ============================================
+  # E2: Catalogue Événements (4 stories) - P0/Low
+  # ============================================
+  epic-2: backlog
+  2-1-liste-des-evenements: backlog
+  2-2-detail-d-un-evenement: backlog
+  2-3-recherche-d-evenements: backlog
+  2-4-affichage-categories-de-billets: backlog
+  epic-2-retrospective: optional
+
+  # ============================================
+  # E3: Achat de Billets (6 stories) - P0/High
+  # ============================================
+  epic-3: backlog
+  3-1-selection-categorie-de-billet: backlog
+  3-2-choix-quantite: backlog
+  3-3-recapitulatif-commande: backlog
+  3-4-paiement-stripe: backlog
+  3-5-confirmation-commande: backlog
+  3-6-envoi-billets-par-email: backlog
+  epic-3-retrospective: optional
+
+  # ============================================
+  # E4: Gestion des Billets (5 stories) - P0/Medium
+  # ============================================
+  epic-4: backlog
+  4-1-liste-mes-billets: backlog
+  4-2-affichage-qr-code: backlog
+  4-3-telechargement-pdf: backlog
+  4-4-renvoi-email: backlog
+  4-5-recuperation-billet-guest: backlog
+  epic-4-retrospective: optional
+
+  # ============================================
+  # E5: Gestion des Événements (8 stories) - P0/Medium
+  # ============================================
+  epic-5: backlog
+  5-1-creation-evenement: backlog
+  5-2-informations-evenement: backlog
+  5-3-creation-categories-billets: backlog
+  5-4-prix-et-jauge-par-categorie: backlog
+  5-5-publication-evenement: backlog
+  5-6-depublication-evenement: backlog
+  5-7-modification-evenement: backlog
+  5-8-suppression-evenement: backlog
+  epic-5-retrospective: optional
+
+  # ============================================
+  # E6: Dashboard Organisateur (4 stories) - P1/Low
+  # ============================================
+  epic-6: backlog
+  6-1-liste-mes-evenements: backlog
+  6-2-statistiques-de-vente: backlog
+  6-3-liste-billets-vendus: backlog
+  6-4-montant-total-des-ventes: backlog
+  epic-6-retrospective: optional
+
+  # ============================================
+  # E7: Scan & Contrôle (5 stories) - P0/High
+  # ============================================
+  epic-7: in-progress
+  7-1-acces-mode-scan: ready-for-dev
+  7-2-scan-qr-code: backlog
+  7-3-resultat-du-scan: backlog
+  7-4-mode-offline: backlog
+  7-5-synchronisation-offline-online: backlog
+  epic-7-retrospective: optional

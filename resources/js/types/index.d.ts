@@ -37,7 +37,92 @@ export interface User {
     avatar?: string;
     email_verified_at: string | null;
     two_factor_enabled?: boolean;
+    is_organizer?: boolean;
     created_at: string;
     updated_at: string;
-    [key: string]: unknown; // This allows for additional properties...
+    [key: string]: unknown;
+}
+
+export interface Event {
+    id: number;
+    user_id: number;
+    title: string;
+    slug: string;
+    description: string;
+    starts_at: string;
+    ends_at: string | null;
+    location: string;
+    address: string | null;
+    city: string;
+    image: string | null;
+    status: 'draft' | 'published' | 'cancelled';
+    is_featured: boolean;
+    created_at: string;
+    updated_at: string;
+    tickets_count?: number;
+    orders_count?: number;
+    ticket_categories?: TicketCategory[];
+}
+
+export interface TicketCategory {
+    id: number;
+    event_id: number;
+    name: string;
+    description: string | null;
+    price: number;
+    quantity: number;
+    quantity_sold: number;
+    sales_start_at: string | null;
+    sales_end_at: string | null;
+    max_per_order: number;
+    sort_order: number;
+}
+
+export interface Order {
+    id: number;
+    user_id: number;
+    event_id: number;
+    reference: string;
+    total: number;
+    fees: number;
+    status: 'pending' | 'paid' | 'refunded' | 'cancelled';
+    stripe_session_id: string | null;
+    stripe_payment_intent_id: string | null;
+    paid_at: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Ticket {
+    id: number;
+    uuid: string;
+    order_id: number;
+    ticket_category_id: number;
+    qr_code: string;
+    holder_name: string | null;
+    holder_email: string | null;
+    status: 'valid' | 'used' | 'cancelled' | 'refunded';
+    scanned_at: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PaginatedData<T> {
+    data: T[];
+    current_page: number;
+    first_page_url: string;
+    from: number | null;
+    last_page: number;
+    last_page_url: string;
+    links: {
+        url: string | null;
+        label: string;
+        active: boolean;
+    }[];
+    next_page_url: string | null;
+    path: string;
+    per_page: number;
+    prev_page_url: string | null;
+    to: number | null;
+    total: number;
 }
